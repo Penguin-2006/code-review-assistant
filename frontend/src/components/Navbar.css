@@ -3,9 +3,10 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--space-md) var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-ink);
   flex-wrap: wrap;
   gap: var(--space-sm);
+  background: var(--color-ink);
 }
 
 .navbar-brand {
@@ -13,7 +14,7 @@
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--color-ink);
+  color: var(--color-paper);
   white-space: nowrap;
 }
 
@@ -27,18 +28,18 @@
   font-family: var(--font-mono);
   font-size: 0.85rem;
   text-decoration: none;
-  color: var(--color-ink-muted);
+  color: #8A8F99;
   transition: color 0.15s ease;
 }
 
 .navbar-links a:hover {
-  color: var(--color-ink);
+  color: var(--color-paper);
 }
 
 .navbar-user {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: var(--color-ink-muted);
+  color: #8A8F99;
 }
 
 .navbar-logout {
@@ -46,12 +47,12 @@
   font-size: 0.85rem;
   background: none;
   border: none;
-  color: var(--color-ink-muted);
+  color: #8A8F99;
   padding: 0;
 }
 
 .navbar-logout:hover {
-  color: var(--color-ink);
+  color: var(--color-paper);
 }
 
 @media (max-width: 480px) {
