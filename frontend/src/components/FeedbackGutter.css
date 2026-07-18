@@ -1,0 +1,36 @@
+.feedback-gutter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.feedback-category {
+  border-left: 3px solid;
+  padding-left: var(--space-sm);
+}
+
+.feedback-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.feedback-category ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.feedback-category li {
+  font-size: 0.9rem;
+  color: var(--color-ink);
+}
+
+.feedback-empty {
+  font-size: 0.85rem;
+  color: var(--color-ink-muted);
+  font-style: italic;
+}
