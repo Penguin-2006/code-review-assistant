@@ -7,6 +7,10 @@
 .auth-card {
   width: 100%;
   max-width: 360px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  padding: var(--space-lg);
+  background: white;
 }
 
 .auth-card h2 {
