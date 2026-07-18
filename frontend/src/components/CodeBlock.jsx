@@ -1,3 +1,5 @@
+import './CodeBlock.css';
+
 function CodeBlock({ code }) {
   const lines = code.split('\n');
   return (
