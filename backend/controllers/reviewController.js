@@ -11,6 +11,9 @@ const createReview = async (req, res) => {
     if (!language) {
       return res.status(400).json({ message: 'Language is required' });
     }
+    if (code.length > 5000) {
+      return res.status(400).json({ message: 'Code exceeds maximum length of 5000 characters' });
+    }
 
     const feedback = await reviewCode(code, language);
 
@@ -23,7 +26,8 @@ const createReview = async (req, res) => {
 
     res.status(201).json(review);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error('Create review error:', err);
+    res.status(500).json({ message: 'Failed to generate review, please try again' });
   }
 };
 
@@ -32,7 +36,8 @@ const getReviews = async (req, res) => {
     const reviews = await Review.find({ user: req.userId }).sort({ createdAt: -1 });
     res.status(200).json(reviews);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error('Get reviews error:', err);
+    res.status(500).json({ message: 'Failed to fetch reviews' });
   }
 };
 
@@ -44,7 +49,8 @@ const getReviewById = async (req, res) => {
     }
     res.status(200).json(review);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error('Get review by id error:', err);
+    res.status(500).json({ message: 'Failed to fetch review' });
   }
 };
 

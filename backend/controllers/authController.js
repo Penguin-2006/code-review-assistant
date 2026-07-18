@@ -6,9 +6,15 @@ const generateToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
 };
 
+const isValidString = (val) => typeof val === 'string' && val.trim().length > 0;
+
 const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+
+    if (!isValidString(name) || !isValidString(email) || !isValidString(password)) {
+      return res.status(400).json({ message: 'Invalid input' });
+    }
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -29,13 +35,18 @@ const register = async (req, res) => {
       token,
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error('Register error:', err);
+    res.status(500).json({ message: 'Something went wrong, please try again' });
   }
 };
 
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    if (!isValidString(email) || !isValidString(password)) {
+      return res.status(400).json({ message: 'Invalid input' });
+    }
 
     const user = await User.findOne({ email });
     if (!user) {
@@ -56,7 +67,8 @@ const login = async (req, res) => {
       token,
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error('Login error:', err);
+    res.status(500).json({ message: 'Something went wrong, please try again' });
   }
 };
 
