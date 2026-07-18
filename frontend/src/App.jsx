@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Submit from './pages/Submit';
 import History from './pages/History';
+import ReviewDetail from './pages/ReviewDetail';
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <History />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/history/:id"
+            element={
+              <ProtectedRoute>
+                <ReviewDetail />
               </ProtectedRoute>
             }
           />
