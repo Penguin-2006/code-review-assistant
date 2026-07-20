@@ -2,6 +2,8 @@
 
 A full-stack MERN application that provides AI-powered code reviews. Paste in a code snippet, and get structured feedback on bugs, style issues, security concerns, and complexity — backed by an LLM, with reviews saved to your personal history.
 
+> Note: The backend is hosted on Render's free tier and may take 30-60 seconds to wake up on the first request if it has been inactive.
+
 ## Features
 
 - User authentication (JWT-based, passwords hashed with bcrypt)
