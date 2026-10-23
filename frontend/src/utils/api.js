@@ -14,7 +14,14 @@ export async function apiRequest(endpoint, options = {}) {
     headers,
   });
 
-  const data = await res.json();
+  const data = await res.json().catch(() => ({}));
+
+  if (res.status === 401) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = '/login';
+    throw new Error(data.message || 'Session expired, please log in again');
+  }
 
   if (!res.ok) {
     throw new Error(data.message || 'Something went wrong');

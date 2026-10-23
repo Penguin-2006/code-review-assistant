@@ -1,18 +1,22 @@
+const mongoose = require('mongoose');
 const Review = require('../models/Review');
 const reviewCode = require('../utils/groqClient');
+
+const ALLOWED_LANGUAGES = ['javascript', 'python', 'java', 'c++', 'typescript', 'go'];
+const MAX_CODE_LENGTH = 5000;
 
 const createReview = async (req, res) => {
   try {
     const { code, language } = req.body;
 
-    if (!code || !code.trim()) {
+    if (typeof code !== 'string' || !code.trim()) {
       return res.status(400).json({ message: 'Code is required' });
     }
-    if (!language) {
-      return res.status(400).json({ message: 'Language is required' });
+    if (typeof language !== 'string' || !ALLOWED_LANGUAGES.includes(language)) {
+      return res.status(400).json({ message: 'Unsupported language' });
     }
-    if (code.length > 5000) {
-      return res.status(400).json({ message: 'Code exceeds maximum length of 5000 characters' });
+    if (code.length > MAX_CODE_LENGTH) {
+      return res.status(400).json({ message: `Code exceeds maximum length of ${MAX_CODE_LENGTH} characters` });
     }
 
     const feedback = await reviewCode(code, language);
@@ -43,6 +47,10 @@ const getReviews = async (req, res) => {
 
 const getReviewById = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(404).json({ message: 'Review not found' });
+    }
+
     const review = await Review.findOne({ _id: req.params.id, user: req.userId });
     if (!review) {
       return res.status(404).json({ message: 'Review not found' });
